@@ -1,0 +1,13 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_JOIN_CPA](
+	[CUS_NO] [int] NULL,
+	[NEW_DATE] [datetime] NULL,
+	[RESPONSE] [varchar](100) NULL,
+	[PARAM] [varchar](100) NULL
+) ON [PRIMARY]
+GO

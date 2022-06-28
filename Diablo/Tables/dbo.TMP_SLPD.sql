@@ -1,0 +1,12 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_SLPD](
+	[FLAG] [varchar](28) NOT NULL,
+	[CODE] [varchar](28) NOT NULL,
+	[DATE] [datetime] NOT NULL
+) ON [PRIMARY]
+GO

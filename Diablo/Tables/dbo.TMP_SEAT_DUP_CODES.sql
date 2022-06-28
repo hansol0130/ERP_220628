@@ -1,0 +1,17 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_SEAT_DUP_CODES](
+	[GRP_IDX] [int] NULL,
+	[SEAT_IDX] [int] NULL,
+	[SEAT_CODE] [int] NULL,
+	[FIRST_PRO_CODE] [varchar](20) NULL,
+	[USE_PRO_CNT] [int] NULL,
+	[SYS_CHK_YN] [char](1) NULL,
+	[SYS_CHK_REMARK] [varchar](1000) NULL,
+	[NEW_dATE] [datetime] NULL
+) ON [PRIMARY]
+GO

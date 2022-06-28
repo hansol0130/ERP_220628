@@ -1,0 +1,14 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [onetime].[EVT_SELECT_VIP_2022](
+	[CUS_NO] [int] NULL,
+	[NOR_TEL] [varchar](15) NULL,
+	[CUS_GRADE] [int] NULL,
+	[CUS_GRADE_NAME] [varchar](20) NULL,
+	[REMARK] [varchar](100) NULL
+) ON [PRIMARY]
+GO

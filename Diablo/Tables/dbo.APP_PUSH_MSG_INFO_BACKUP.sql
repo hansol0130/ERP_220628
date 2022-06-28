@@ -1,0 +1,17 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APP_PUSH_MSG_INFO_BACKUP](
+	[MSG_NO] [int] IDENTITY(1,1) NOT NULL,
+	[TEMPLATE_TYPE] [varchar](1) NOT NULL,
+	[TITLE] [varchar](50) NOT NULL,
+	[MSG] [varchar](1000) NULL,
+	[MSG_DETAIL] [varchar](1000) NULL,
+	[RECV_DATE] [datetime] NOT NULL,
+	[IMAGE_URL] [varchar](200) NULL,
+	[LINK_URL] [varchar](200) NULL
+) ON [PRIMARY]
+GO

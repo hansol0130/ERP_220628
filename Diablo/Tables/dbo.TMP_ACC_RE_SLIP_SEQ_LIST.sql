@@ -1,0 +1,15 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_ACC_RE_SLIP_SEQ_LIST](
+	[SLIP_MK_DAY] [char](8) NULL,
+	[SLIP_MK_SEQ] [smallint] NULL,
+	[NEW_DATE] [datetime] NULL,
+	[SLIP_CNT] [int] NULL,
+	[PAY_TYPE] [int] NULL,
+	[PAY_SEQ] [int] NULL
+) ON [PRIMARY]
+GO

@@ -1,0 +1,15 @@
+USE [JGHotel]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HTL_ZZIM](
+	[ZZIM_NO] [int] NOT NULL,
+	[USER_ID] [varchar](30) NULL,
+	[HOTEL_CODE] [int] NULL,
+	[CITY_CODE] [bigint] NULL,
+	[HOTEL_LINK] [varchar](200) NULL,
+	[CREATE_DATE] [datetime] NULL
+) ON [PRIMARY]
+GO

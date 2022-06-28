@@ -1,0 +1,17 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_CUS_VIP_HISTORY](
+	[SEQ_NO] [int] IDENTITY(1,1) NOT NULL,
+	[VIP_YEAR] [varchar](4) NOT NULL,
+	[CUS_NO] [int] NOT NULL,
+	[CUS_GRADE] [int] NOT NULL,
+	[CUS_GRADE_NAME] [varchar](20) NOT NULL,
+	[NEW_DATE] [datetime] NOT NULL,
+	[EDT_DATE] [datetime] NULL,
+	[EDT_CODE] [char](7) NULL
+) ON [PRIMARY]
+GO

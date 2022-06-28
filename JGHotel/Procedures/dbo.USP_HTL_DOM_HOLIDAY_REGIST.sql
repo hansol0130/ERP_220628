@@ -1,0 +1,39 @@
+USE [JGHotel]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[USP_HTL_DOM_HOLIDAY_REGIST]  
+  
+/*  
+[USP_HTL_DOM_HOLIDAY_REGIST] '2015-05-06', '3', '테스트', 'HOTEL.DBO.HTL_CODE_HOLIDAY'
+*/  
+
+@HOL_DATE VARCHAR(10),
+@WEEK_DAY VARCHAR(1),
+@DATE_DESC VARCHAR(50),
+@DB_NAME VARCHAR(MAX)  
+
+AS
+
+DECLARE @SQL VARCHAR(MAX)      
+       
+SET @SQL = ''  
+
+SET @SQL = @SQL + ' INSERT INTO ' + @DB_NAME + CHAR(13)
+SET @SQL = @SQL + ' ( ' + CHAR(13)
+SET @SQL = @SQL + ' TARGET_DATE, ' + CHAR(13)
+SET @SQL = @SQL + ' WEEK_DAY, ' + CHAR(13)
+SET @SQL = @SQL + ' DATE_DESC ' + CHAR(13)
+SET @SQL = @SQL + ' ) ' + CHAR(13)
+SET @SQL = @SQL + ' VALUES ' + CHAR(13)
+SET @SQL = @SQL + ' ( ' + CHAR(13)
+SET @SQL = @SQL + '''' + @HOL_DATE + ''','  + CHAR(13)
+SET @SQL = @SQL + '''' + @WEEK_DAY + ''',' + CHAR(13)
+SET @SQL = @SQL + '''' + @DATE_DESC + '''' + CHAR(13)
+SET @SQL = @SQL + ' ) ' + CHAR(13)
+
+PRINT(@SQL)          
+EXEC(@SQL)
+GO

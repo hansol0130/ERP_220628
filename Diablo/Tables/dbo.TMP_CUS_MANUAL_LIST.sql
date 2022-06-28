@@ -1,0 +1,13 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_CUS_MANUAL_LIST](
+	[GIJUN_NO] [int] NULL,
+	[CUS_NO] [int] NULL,
+	[NEW_DATE] [smalldatetime] NULL,
+	[NEW_CODE] [char](7) NULL
+) ON [PRIMARY]
+GO

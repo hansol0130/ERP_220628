@@ -1,0 +1,16 @@
+USE [Cuve]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TMP_MASTER_CODE_MAIN_CITY](
+	[REGION_CODE] [varchar](2) NULL,
+	[ATT_CODE] [varchar](1) NULL,
+	[MASTER_CODE] [varchar](10) NOT NULL,
+	[LOW_PRICE] [int] NULL,
+	[TOUR_DAY] [int] NULL,
+	[SEQ] [bigint] NULL,
+	[CITY_CODE] [char](3) NULL
+) ON [PRIMARY]
+GO

@@ -1,0 +1,48 @@
+USE [JGHotel]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HTL_RESV_PAY](
+	[RESV_NO] [int] NOT NULL,
+	[PAY_NO] [int] NOT NULL,
+	[PAY_TYPE] [varchar](4) NULL,
+	[PAY_CURRENCY] [varchar](3) NULL,
+	[PAY_TOTAL_AMOUNT] [decimal](16, 2) NULL,
+	[PAY_STATUS] [varchar](4) NULL,
+	[PAY_DATE] [datetime] NULL,
+	[PAY_USER] [varchar](100) NULL,
+	[CARD_AMOUNT] [decimal](16, 2) NULL,
+	[CARD_NAME] [varchar](100) NULL,
+	[CARD_NUM] [varchar](100) NULL,
+	[CARD_PARTNER] [varchar](100) NULL,
+	[CASH_AMOUNT] [decimal](16, 2) NULL,
+	[CASH_ACCOUNT_BANK] [varchar](1000) NULL,
+	[CASH_ACCOUNT_NO] [varchar](50) NULL,
+	[CASH_PAY_NAME] [varchar](100) NULL,
+	[CASH_PAY_DATE] [datetime] NULL,
+	[CASH_RECEIPT_CONT] [varchar](500) NULL,
+	[APP_NO] [varchar](50) NULL,
+	[TRAN_NO] [varchar](50) NULL,
+	[PAYMENT_ID] [varchar](50) NULL,
+	[LAST_UPDATE_YN] [varchar](1) NULL,
+	[LAST_UPDATE_DATE] [datetime] NULL,
+	[LAST_UPDATE_USER] [varchar](15) NULL,
+	[PAY_SEQ] [int] IDENTITY(1,1) NOT NULL,
+	[REF_PAY_SEQ] [int] NULL,
+	[USE_YN] [varchar](1) NULL,
+	[CONN_NO] [int] NULL,
+	[REAL_RECEIVE_MONEY] [decimal](18, 0) NULL,
+	[REAL_RECEIVE_DATE] [datetime] NULL,
+	[SLIP_ID] [bigint] NULL,
+	[SLIP_DATE] [datetime] NULL,
+	[SLIP_TARGET_YN] [varchar](1) NULL,
+	[CASH_ACCOUNT_BANK_CODE] [varchar](5) NULL,
+ CONSTRAINT [PK_HTL_RESV_PAY] PRIMARY KEY CLUSTERED 
+(
+	[RESV_NO] ASC,
+	[PAY_NO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO

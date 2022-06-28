@@ -1,0 +1,11 @@
+USE [damo]
+GO
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+CREATE FUNCTION [dbo].[damo_clr_init]()
+RETURNS [int] WITH EXECUTE AS CALLER
+AS 
+EXTERNAL NAME [damosaexp].[DamosaExp].[Damo_CLR_Init]
+GO

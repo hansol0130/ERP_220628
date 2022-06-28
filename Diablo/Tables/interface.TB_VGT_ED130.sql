@@ -1,0 +1,47 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [interface].[TB_VGT_ED130](
+	[PAY_RQ_SEQNO] [int] NOT NULL,
+	[ANCLY_SEQNO] [int] NOT NULL,
+	[PAY_GRP_SEQNO] [int] NOT NULL,
+	[DATA_FLAG] [varchar](10) NULL,
+	[PAY_STATUS_CD] [varchar](6) NULL,
+	[PAY_MTH_CD] [varchar](12) NULL,
+	[PAY_TOT_AMT] [int] NULL,
+	[PAY_RQ_DTM] [varchar](14) NULL,
+	[CARD_PAY_AMT] [int] NULL,
+	[CARD_KIND_CD] [varchar](20) NULL,
+	[CARD_NO] [varchar](4000) NULL,
+	[CARD_OWNER_CD] [varchar](2) NULL,
+	[CARD_OWNER_NM] [varchar](150) NULL,
+	[CARD_INSTLMT_CNT] [varchar](3) NULL,
+	[CARD_VALID_YY] [varchar](4000) NULL,
+	[CARD_VALID_MM] [varchar](4000) NULL,
+	[CARD_PWD] [varchar](4000) NULL,
+	[CASH_PAY_AMT] [int] NULL,
+	[DEPOSIT_BANK_CD] [varchar](10) NULL,
+	[DEPOSIT_ACNT_NO] [varchar](4000) NULL,
+	[DEPOSIT_ACNT_OWNER] [varchar](50) NULL,
+	[RMTR_NM] [varchar](100) NULL,
+	[DELNG_NO] [varchar](40) NULL,
+	[DEPOSIT_PREARNGE_DTM] [varchar](14) NULL,
+	[DEPOSIT_CONFM_YN] [varchar](1) NULL,
+	[GCCT_POINT_KIND] [varchar](4) NULL,
+	[GCCT_POINT_AMT] [int] NULL,
+	[GCCT_NO] [varchar](200) NULL,
+	[VAN_FLAG] [varchar](10) NULL,
+	[VAN_TRX_ID] [varchar](50) NULL,
+	[REG_USR_ID] [varchar](50) NULL,
+	[REG_DTM] [varchar](14) NULL,
+	[UPD_USR_ID] [varchar](50) NULL,
+	[UPD_DTM] [varchar](14) NULL,
+ CONSTRAINT [PK_TB_VGT_ED130] PRIMARY KEY CLUSTERED 
+(
+	[PAY_RQ_SEQNO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO

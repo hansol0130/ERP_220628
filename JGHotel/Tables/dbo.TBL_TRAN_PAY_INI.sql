@@ -1,0 +1,73 @@
+USE [JGHotel]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TBL_TRAN_PAY_INI](
+	[P_SEQ] [bigint] IDENTITY(1,1) NOT NULL,
+	[P_TID] [varchar](100) NULL,
+	[P_MID] [varchar](100) NULL,
+	[P_AUTH_DT] [varchar](100) NULL,
+	[P_STATUS] [varchar](100) NULL,
+	[P_TYPE] [varchar](100) NULL,
+	[P_OID] [varchar](100) NULL,
+	[P_FN_CD1] [varchar](100) NULL,
+	[P_FN_CD2] [varchar](100) NULL,
+	[P_FN_NM] [varchar](100) NULL,
+	[P_AMT] [decimal](18, 0) NULL,
+	[P_PAY_AMT] [decimal](18, 0) NULL,
+	[P_CX_AMT] [decimal](18, 0) NULL,
+	[P_UNAME] [varchar](100) NULL,
+	[P_RMESG1] [varchar](500) NULL,
+	[P_RMESG2] [varchar](500) NULL,
+	[P_RMESG3] [varchar](500) NULL,
+	[P_NOTI] [varchar](500) NULL,
+	[P_AUTH_NO] [varchar](100) NULL,
+	[P_CSHR_AMT] [varchar](100) NULL,
+	[P_CSHR_SUP_AMT] [varchar](100) NULL,
+	[P_CSHR_TAX] [varchar](100) NULL,
+	[P_CSHR_SRVC_AMT] [varchar](100) NULL,
+	[P_CSHR_TYPE] [varchar](100) NULL,
+	[P_CSHR_DT] [varchar](100) NULL,
+	[P_CSHR_AUTH_NO] [varchar](100) NULL,
+	[P_HASH] [varchar](500) NULL,
+	[P_MNAME] [varchar](100) NULL,
+	[P_CARD_NUM] [varchar](100) NULL,
+	[P_CARD_MEMBER_NUM] [varchar](100) NULL,
+	[P_CARD_ISSUER_CODE] [varchar](100) NULL,
+	[P_CARD_ISSUER_NAME] [varchar](100) NULL,
+	[P_CARD_PURCHASE_CODE] [varchar](100) NULL,
+	[P_CARD_PURCHASE_NAME] [varchar](100) NULL,
+	[P_CARD_PRTC_CODE] [varchar](100) NULL,
+	[P_CARD_INTEREST] [varchar](100) NULL,
+	[P_CARD_CHECKFLAG] [varchar](100) NULL,
+	[P_MERCHANT_RESERVED] [varchar](100) NULL,
+	[P_CARD_APPLPRICE] [varchar](100) NULL,
+	[P_EVENT_CODE] [varchar](100) NULL,
+	[P_PRTC_CODE] [varchar](100) NULL,
+	[P_ISP_CARDCODE] [varchar](100) NULL,
+	[P_VACT_NUM] [varchar](100) NULL,
+	[P_VACT_DATE] [varchar](100) NULL,
+	[P_VACT_TIME] [varchar](100) NULL,
+	[P_VACT_NAME] [varchar](100) NULL,
+	[P_VACT_BANK_CODE] [varchar](100) NULL,
+	[P_VACT_NOTI_YN] [varchar](1) NULL,
+	[P_CSHR_CODE] [varchar](100) NULL,
+	[P_CSHR_MSG] [varchar](100) NULL,
+	[P_SRC_CODE] [varchar](100) NULL,
+	[P_ARS_AUTH_NO] [varchar](100) NULL,
+	[P_NEXT_URL] [varchar](500) NULL,
+	[P_NOTEURL] [varchar](500) NULL,
+	[P_OLD_TID] [varchar](100) NULL,
+	[CREATE_DATE] [datetime] NULL,
+	[CANCEL_DATE] [datetime] NULL,
+	[P_CARD_NUM_OLD] [varchar](100) NULL,
+	[P_VACT_NUM_OLD] [varchar](100) NULL,
+	[RESV_NO] [int] NULL,
+ CONSTRAINT [PK_TBL_TRAN_PAY_INI] PRIMARY KEY CLUSTERED 
+(
+	[P_SEQ] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO

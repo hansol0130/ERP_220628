@@ -1,0 +1,18 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CUS_RECOMMEND](
+	[REC_SEQ] [int] IDENTITY(1,1) NOT NULL,
+	[REC_GRP_SEQ] [int] NULL,
+	[CUS_TYPE] [int] NULL,
+	[REC_TYPE] [int] NULL,
+	[CUS_NO] [int] NULL,
+	[POINT_NO] [int] NULL,
+	[NEW_CODE] [dbo].[NEW_CODE] NOT NULL,
+	[NEW_DATE] [datetime] NULL,
+	[REMARK] [varchar](500) NULL
+) ON [PRIMARY]
+GO

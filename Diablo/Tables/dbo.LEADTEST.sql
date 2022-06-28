@@ -1,0 +1,12 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LEADTEST](
+	[ID] [int] NULL,
+	[START_DATE] [datetime] NULL,
+	[END_DATE] [datetime] NULL
+) ON [PRIMARY]
+GO

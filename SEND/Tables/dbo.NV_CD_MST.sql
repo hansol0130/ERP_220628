@@ -1,0 +1,30 @@
+USE [SEND]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NV_CD_MST](
+	[CD_CAT] [varchar](10) NOT NULL,
+	[CD] [varchar](20) NOT NULL,
+	[LANG] [varchar](10) NOT NULL,
+	[PAR_CD_CAT] [varchar](10) NOT NULL,
+	[VAL] [varchar](100) NULL,
+	[CD_DESC] [varchar](2000) NULL,
+	[USE_COL] [varchar](50) NULL,
+	[USE_YN] [char](1) NOT NULL,
+	[REG_DTM] [varchar](14) NOT NULL,
+	[MOD_DTM] [varchar](14) NULL,
+	[CD_ORD] [numeric](10, 0) NULL,
+ CONSTRAINT [PK_NV_CD_MST] PRIMARY KEY CLUSTERED 
+(
+	[CD_CAT] ASC,
+	[CD] ASC,
+	[LANG] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[NV_CD_MST] ADD  DEFAULT ('y') FOR [USE_YN]
+GO
+ALTER TABLE [dbo].[NV_CD_MST] ADD  DEFAULT (replace(replace(replace(CONVERT([varchar],getdate(),(120)),'-',''),':',''),' ','')) FOR [REG_DTM]
+GO

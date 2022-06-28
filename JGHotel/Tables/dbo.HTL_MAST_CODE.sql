@@ -1,0 +1,14 @@
+USE [JGHotel]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HTL_MAST_CODE](
+	[M_CODE] [varchar](4) NOT NULL,
+	[S_CODE] [varchar](10) NOT NULL,
+	[CODE_NAME] [varchar](300) NULL,
+	[CODE_NAME2] [varchar](300) NULL,
+	[CODE_DESC] [varchar](500) NULL
+) ON [PRIMARY]
+GO

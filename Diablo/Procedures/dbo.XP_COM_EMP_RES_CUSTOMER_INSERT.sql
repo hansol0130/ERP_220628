@@ -1,0 +1,152 @@
+USE [Diablo]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*================================================================================================================
+■ USP_NAME					: XP_COM_EMP_RES_CUSTOMER_INSERT
+■ DESCRIPTION				: 팝업 btms 직원 출발자 추가 
+■ INPUT PARAMETER			: 
+■ OUTPUT PARAMETER			: 
+
+■ EXEC						: 
+	EXEC XP_COM_EMPLOYEE_NEW_INSERT '92756','2016021','','1','test','19790909','M','2EA6201A068C5FA0EEA5D81A3863321A87F8D533','010-123-1233','010','123','1233','2010-03-01','KNIHGT@NAVER.COM','1','100'
+
+■ MEMO						: 
+------------------------------------------------------------------------------------------------------------------
+■ CHANGE HISTORY                   
+------------------------------------------------------------------------------------------------------------------
+   DATE				AUTHOR			DESCRIPTION           
+------------------------------------------------------------------------------------------------------------------
+   2016-05-20		박형만					로직변경 
+   2016-05-23		박형만					패키지 가격조건 수정 
+================================================================================================================*/ 
+CREATE PROCEDURE [dbo].[XP_COM_EMP_RES_CUSTOMER_INSERT]
+(
+	@AGT_CODE			VARCHAR(10),
+	@EMP_SEQ			int,
+	@CUS_NO				INT,   --직접 받음
+
+	@NEW_CODE			EMP_CODE=NULL,
+	@RES_CODE			VARCHAR(12) = NULL 
+)
+AS 
+BEGIN 
+
+DECLARE @KOR_NAME			VARCHAR(20),
+	@BIRTH_DATE			VARCHAR(10),
+	@GENDER				CHAR(1),
+	@HP_NUMBER			VARCHAR(20),
+	--@HP_TEL01			VARCHAR(20),
+	--@HP_TEL02			VARCHAR(20),
+	--@HP_TEL03			VARCHAR(20),
+	@EMAIL				VARCHAR(50)--,
+	--@CUS_NO				INT 
+
+	--기존 직원 정보로 채우기 
+	-- 고객정보,예약정보에 업데이트될 정보 
+	SELECT top 1 @KOR_NAME = KOR_NAME  , @EMAIL = EMAIL , @GENDER = GENDER ,   @HP_NUMBER = HP_NUMBER , @BIRTH_DATE = BIRTH_DATE --,
+		--@CUS_NO = B.CUS_NO  --기존 매핑 정보 로 갱신 
+	FROM COM_EMPLOYEE A WITH(NOLOCK)
+		LEFT JOIN COM_EMPLOYEE_MATCHING B WITH(NOLOCK)
+			ON A.AGT_CODE = B.AGT_CODE 
+			AND A.EMP_SEQ = B.EMP_SEQ 
+	WHERE A.AGT_CODE = @AGT_CODE 
+	AND A.EMP_SEQ =  @EMP_SEQ
+
+	-- 고객 정보 등록전 
+	-- 휴대폰 번호 갱신 
+	DECLARE @NOR_TEL1 VARCHAR(6)
+	DECLARE @NOR_TEL2 VARCHAR(6)
+	DECLARE @NOR_TEL3 VARCHAR(6)
+	IF(ISNULL(@HP_NUMBER,'') <> '')
+	BEGIN
+		SET @NOR_TEL1 =  (SELECT DATA FROM DBO.FN_SPLIT(@HP_NUMBER,'-') WHERE ID = 1)
+		SET @NOR_TEL2 =  (SELECT DATA FROM DBO.FN_SPLIT(@HP_NUMBER,'-') WHERE ID = 2)
+		SET @NOR_TEL3 =  (SELECT DATA FROM DBO.FN_SPLIT(@HP_NUMBER,'-') WHERE ID = 3)
+	END 
+
+
+	--출발자 추가 
+	IF ISNULL(@RES_CODE,'') <> ''
+	BEGIN 
+			
+		DECLARE @PRO_TYPE INT
+		DECLARE @PRO_CODE VARCHAR(20) 
+		DECLARE @PRICE_SEQ INT 
+		DECLARE @SEQ_NO INT 
+
+		--기존 예약자정보 구하기  
+		SELECT TOP 1 @PRO_TYPE = PRO_TYPE , @PRO_CODE = PRO_CODE , @PRICE_SEQ = PRICE_SEQ FROM RES_MASTER_DAMO WITH(NOLOCK) WHERE RES_CODE = @RES_CODE 
+
+		--기존 출발자 MAX_SEQ_NO 정보 구하기  
+		SET @SEQ_NO = ISNULL((SELECT MAX(SEQ_NO) FROM RES_CUSTOMER_DAMO WITH(NOLOCK) WHERE RES_CODE = @RES_CODE) ,0) +1 
+
+		--패키지 
+		IF (@PRO_TYPE = 1 )
+		BEGIN
+			--예약이 있을경우 첫번째 사람으로 넣기 
+			IF EXISTS ( SELECT * FROM RES_CUSTOMER_damo WITH(NOLOCK) WHERE RES_CODE = @RES_CODE AND RES_STATE = 0)
+			BEGIN
+				INSERT INTO RES_CUSTOMER_damo ( RES_CODE , SEQ_NO , CUS_NO , CUS_NAME, EMAIL, BIRTH_DATE, GENDER, NOR_TEL1,NOR_TEL2,NOR_TEL3,  
+					SALE_PRICE ,  TAX_PRICE  ,CHG_PRICE ,
+					NEW_DATE, NEW_CODE ) 
+
+				SELECT TOP 1 @RES_CODE,@SEQ_NO  , @CUS_NO , @KOR_NAME ,@EMAIL ,@BIRTH_DATE , @GENDER ,  @NOR_TEL1,@NOR_TEL2,@NOR_TEL3, 
+					ISNULL(SALE_PRICE,0), ISNULL(TAX_PRICE,0), ISNULL(CHG_PRICE,0),
+					GETDATE() , @NEW_CODE 
+				FROM RES_CUSTOMER_damo  
+				WHERE RES_CODE = @RES_CODE AND RES_STATE = 0 
+				ORDER BY SEQ_NO ASC 
+			END 
+			ELSE 
+			BEGIN
+				INSERT INTO RES_CUSTOMER_damo ( RES_CODE , SEQ_NO , CUS_NO, CUS_NAME, EMAIL, BIRTH_DATE, GENDER, NOR_TEL1,NOR_TEL2,NOR_TEL3,  
+					SALE_PRICE ,  TAX_PRICE  ,CHG_PRICE ,
+					NEW_DATE, NEW_CODE ) 
+				SELECT @RES_CODE, @SEQ_NO , @CUS_NO ,@KOR_NAME ,@EMAIL ,@BIRTH_DATE , @GENDER ,  @NOR_TEL1,@NOR_TEL2,@NOR_TEL3, 
+					0 , 0, 0 , 
+					GETDATE() , @NEW_CODE 
+			END 
+
+			----성인가격이 있을경우 넣기 
+			--INSERT INTO RES_CUSTOMER_damo ( RES_CODE , SEQ_NO , CUS_NAME, EMAIL, BIRTH_DATE, GENDER, NOR_TEL1,NOR_TEL2,NOR_TEL3,  
+			--	SALE_PRICE , TAX_PRICE  ,
+			--	NEW_DATE, NEW_CODE ) 
+
+			--SELECT @RES_CODE,@SEQ_NO  ,@KOR_NAME ,@EMAIL ,@BIRTH_DATE , @GENDER ,  @NOR_TEL1,@NOR_TEL2,@NOR_TEL3, 
+			--	ISNULL(ADT_PRICE,0) + ISNULL(ADT_TAX,0), ISNULL(ADT_SALE_QCHARGE,0),
+			--	GETDATE() , @NEW_CODE 
+			--FROM  DBO.XN_PKG_DETAIL_PRICE(@PRO_CODE,@PRICE_SEQ)
+		END 
+		ELSE IF (@PRO_TYPE = 2 )  --항공 
+		BEGIN
+			--성인가격이 있을경우 넣기 
+			INSERT INTO RES_CUSTOMER_damo ( RES_CODE , SEQ_NO , CUS_NO , CUS_NAME, EMAIL, BIRTH_DATE, GENDER, NOR_TEL1,NOR_TEL2,NOR_TEL3,  
+				SALE_PRICE , TAX_PRICE , FIRST_QCHARGE ,
+				NEW_DATE, NEW_CODE ) 
+
+			SELECT @RES_CODE, @SEQ_NO  , @CUS_NO , @KOR_NAME ,@EMAIL ,@BIRTH_DATE , @GENDER ,  @NOR_TEL1,@NOR_TEL2,@NOR_TEL3, 
+				ISNULL(ADT_PRICE,0) + ISNULL(ADT_TAX,0), ISNULL(ADT_QCHARGE,0), ISNULL(ADT_QCHARGE,0),
+				GETDATE() , @NEW_CODE 
+			FROM RES_AIR_DETAIL 
+			WHERE RES_CODE = @RES_CODE 
+		END 
+		ELSE -- 그외 
+		BEGIN
+			--  
+			INSERT INTO RES_CUSTOMER_damo ( RES_CODE , SEQ_NO , CUS_NAME, EMAIL, BIRTH_DATE, GENDER, NOR_TEL1,NOR_TEL2,NOR_TEL3,  
+				NEW_DATE, NEW_CODE ) 
+
+			SELECT @RES_CODE, @SEQ_NO  ,@KOR_NAME ,@EMAIL ,@BIRTH_DATE , @GENDER ,  @NOR_TEL1,@NOR_TEL2,@NOR_TEL3, 
+				GETDATE() , @NEW_CODE 
+		END 
+			
+		-- * FROM PKG_DETAIL_PRICE WITH(NOLOCK) WHERE PRO_CODE = @PRO_CODE  AND PRICE_SEQ = @PRICE_SEQ 
+			
+	END 
+END 
+
+GO
